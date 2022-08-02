@@ -1,10 +1,17 @@
-const app = require('./app')
+const express = require('express')
+// const User = require ('./models/user')
+// const Task = require ('./models/task')
+const userRouter = require('./routers/user')
+const taskRouter = require('./routers/task')
 
-const port = process.env.PORT
+const app = express()
+// const port = process.env.PORT
 
-app.listen(port, () => {
-    console.log('Server is up on port ' + port)
-}) 
+app.use(express.json())
+app.use(userRouter)
+app.use(taskRouter)
+
+module.exports = app
 
 // const multer = require('multer')
 // const upload = multer ({
@@ -46,8 +53,6 @@ app.listen(port, () => {
 // app.use((req,res,next) =>{
 //     res.status(503).send('This site is under maintenance. Try back later.')
 // })
-
-
 
 
 // const main = async (req,res) => {

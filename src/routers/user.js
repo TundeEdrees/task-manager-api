@@ -46,6 +46,10 @@ router.post('/users/login', async (req, res) => {
     }
 })
 
+
+// This route takes away the token that was used to create/login the user
+// req.user and req.token are from auth.js
+//req.user makes it possible to work with a single authenticated user, more like a customer.
 router.post('/users/logout', auth, async(req, res) => {
     try {
         // console.log(req.user)
@@ -60,6 +64,7 @@ router.post('/users/logout', auth, async(req, res) => {
     }
 })
 
+// This router empties the tokens array. Thereby logging out the user everywhere
 router.post('/users/logoutAll', auth , async(req, res) => {
     try {
         req.user.tokens = []
@@ -148,6 +153,7 @@ router.get('/users/:id', async (req,res) => {
 // })
 
 // updating with authentication
+// req.user is from auth.js, once again.
 router.patch('/users/meup', auth, async (req, res) => {
     const updates = Object.keys(req.body)
     const allowedUpdates = ['name', 'email', 'age', 'password']
@@ -185,11 +191,11 @@ router.patch('/users/meup', auth, async (req, res) => {
 // delete with authentication
 router.delete('/users/me', auth, async (req, res) => {
     try{
-        sendGoodByeEmail(user.email, user.name)
+        //sendGoodByeEmail(user.email, user.name)
         await req.user.remove()
-        res.send(req.user)
+        res.status(200).send(req.user)
     } catch(e) {
-        res.status(500).send(e)
+        res.status(400).send(e)
     }
 })
 
@@ -232,4 +238,5 @@ router.get('users/:id/avatar', async(req,res) => {
         res.status(400).send()
     }
 })
+
 module.exports = router

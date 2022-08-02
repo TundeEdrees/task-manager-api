@@ -6,14 +6,14 @@
 // Using destructuring to access properties of mongodb
 const {MongoClient, ObjectID} = require('mongodb')
 
-const connectionURL = process.env.MONGODB_URL
+const connectionURL =  process.env.MONGODB_URL
 const databaseName = 'task-manager'
 
 // const id = new ObjectID()
 // console.log(id.id.length)
 // console.log(id.toHexString().length)
 // console.log(id)
-// console.log(id.getTimestamp())
+// // console.log(id.getTimestamp())
 
 MongoClient.connect(connectionURL, { useNewUrlParser: true}, (error, client) => {
     if (error) {
