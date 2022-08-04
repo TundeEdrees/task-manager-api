@@ -20,7 +20,6 @@ router.post('/users', async (req, res) => {
     } catch(e) {
         res.status(400).send(e)
     }
-    await user.save()
 
     // console.log(req.body)
     // res.send('testing')

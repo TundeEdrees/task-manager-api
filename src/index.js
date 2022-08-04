@@ -1,7 +1,7 @@
 const app = require('./app')
 
-const port = process.env.PORT
-
+const port = process.env.PORT || 3000
+console.log(port)
 app.listen(port, () => {
     console.log('Server is up on port ' + port)
 }) 
@@ -20,7 +20,7 @@ app.listen(port, () => {
 //         // cb(new Error('File must be a pdf'))
 //         cb(undefined, true)
 //         // cb(undefined,true)
-//     }
+//     }cd
 // })
 
 // const errorMiddleware = (req, res, next) => {
