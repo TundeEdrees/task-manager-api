@@ -12,13 +12,14 @@ const {sendWelcomeEmail, sendGoodByeEmail} = require('../emails/accounts')
 router.post('/users', async (req, res) => {
     const user = new User(req.body)
     try{
+        console.log(user)
         const token = await user.generateAuthToken()
         //sendWelcomeEmail(user.email, user.name)
         await user.save()
         res.status(200).send({user,token})
 
     } catch(e) {
-        res.status(400).send(e)
+        res.status(400).send(e.message)
     }
 
     // console.log(req.body)
@@ -41,6 +42,7 @@ router.post('/users/login', async (req, res) => {
         //res.send({user: user.getPublicProfile(), token})
 
     } catch(e){
+        // console.log(e.message)
         res.status(400).send('Login unsuccessful')
     }
 })
